@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=$(grep -c ^processor /proc/cpuinfo)
+ # Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+export HOME=/var/vcap
+
+# download release
+echo "Downloading docker-registry-ui... "
+wget https://github.com/wildloop/docker-registry-ui/releases/download/0.4.1/docker-registry-ui-dist-0.4.1.0.tar.gz
+echo "Exctracting docker-registry-ui... "
+mkdir -p ./docker-registry-ui
+tar xzvf docker-registry-ui.tar.gz -C ./docker-registry-ui
+echo "Copying docker-registry-ui... "
+cp -a docker-registry-ui/* ${BOSH_INSTALL_TARGET}

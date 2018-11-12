@@ -5,11 +5,13 @@ description: "Nginx provides proxy and auth functionalities for Docker Registry"
 
 packages:
   - nginx
+  - docker-registry-ui
 
 templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   config/nginx.conf: config/nginx.conf
+  config/mime.types: config/mime.types
   config/auth/registry.erb: config/auth/registry
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
